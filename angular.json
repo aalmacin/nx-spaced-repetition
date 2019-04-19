@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "spaced-repetition": {
+      "root": "apps/spaced-repetition/",
+      "sourceRoot": "apps/spaced-repetition/src",
+      "projectType": "application",
+      "prefix": "spaced-repetition",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "sass"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/spaced-repetition",
+            "index": "apps/spaced-repetition/src/index.html",
+            "main": "apps/spaced-repetition/src/main.ts",
+            "polyfills": "apps/spaced-repetition/src/polyfills.ts",
+            "tsConfig": "apps/spaced-repetition/tsconfig.app.json",
+            "assets": [
+              "apps/spaced-repetition/src/favicon.ico",
+              "apps/spaced-repetition/src/assets"
+            ],
+            "styles": ["apps/spaced-repetition/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/spaced-repetition/src/environments/environment.ts",
+                  "with": "apps/spaced-repetition/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "spaced-repetition:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "spaced-repetition:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "spaced-repetition:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/spaced-repetition/tsconfig.app.json",
+              "apps/spaced-repetition/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/spaced-repetition/jest.config.js",
+            "tsConfig": "apps/spaced-repetition/tsconfig.spec.json",
+            "setupFile": "apps/spaced-repetition/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "spaced-repetition-e2e": {
+      "root": "apps/spaced-repetition-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/spaced-repetition-e2e/cypress.json",
+            "tsConfig": "apps/spaced-repetition-e2e/tsconfig.e2e.json",
+            "devServerTarget": "spaced-repetition:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "spaced-repetition:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/spaced-repetition-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:application": {
+      "style": "sass",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:library": {
+      "style": "sass"
+    }
+  },
+  "defaultProject": "spaced-repetition"
+}
