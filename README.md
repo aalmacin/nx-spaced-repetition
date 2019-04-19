@@ -17,3 +17,9 @@ ng g app APPNAME
 ```sh
 ng e2e spaced-repetition-e2e --watch
 ```
+
+## Adding .vscode support
+
+```sh
+ng add angular-vscode
+```

@@ -1,9 +1,9 @@
-import { getGreeting } from "../support/app.po";
+import { getHeader } from "../support/home-page.po";
 
 describe("Home Page", () => {
   beforeEach(() => cy.visit("/"));
 
   it("should display welcome message", () => {
-    getGreeting().contains("Welcome to Spaced Repetition");
+    getHeader().contains("Welcome to Spaced Repetition");
   });
 });
